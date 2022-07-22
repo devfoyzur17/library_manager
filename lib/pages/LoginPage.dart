@@ -155,7 +155,7 @@ class _LoginPageState extends State<LoginPage> {
 
                 Align(
                   alignment: Alignment.topRight,
-                  child: TextButton(onPressed: (){}, child: Text("forget password",))),
+                  child: TextButton(onPressed: (){}, child: Text("forget password?",))),
 
                    Padding(
                      padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 20),
