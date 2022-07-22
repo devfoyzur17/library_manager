@@ -22,18 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
    return  Scaffold(
-     appBar: AppBar(
-     // centerTitle: true,
      
-        title: Text(_selectedIndex==0?"Library Managment":_selectedIndex==1?"Reader List":"Favorite"),
-
-        actions: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){}, icon: Icon(Icons.notifications)),
-        ],
-        
- 
-      ),
       drawer: AppDrawer(),
 
       body: Center(

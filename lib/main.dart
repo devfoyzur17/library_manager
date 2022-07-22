@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:library_manager/pages/dashbord_page.dart';
 import 'package:library_manager/pages/login_page.dart';
 import 'package:library_manager/pages/home_page.dart';
 import 'package:library_manager/pages/launcher_page.dart';
@@ -30,7 +31,9 @@ class MyApp extends StatelessWidget {
         SignUpPage.routeName :(context) => const SignUpPage(),
         BottomNavBar.routeName : (context) => const BottomNavBar(),
         HomePage.routeName :(context) => const HomePage(),
-        ReaderPage.routeName : (context) => const ReaderPage()
+        ReaderPage.routeName : (context) => const ReaderPage(),
+        DashbordPage.routeName : (context) => const DashbordPage(),
+        
         
       },
     );

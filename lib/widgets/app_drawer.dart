@@ -1,6 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart';
+import 'package:library_manager/auth_pref.dart';
+import 'package:library_manager/pages/dashbord_page.dart';
+import 'package:library_manager/pages/home_page.dart';
+import 'package:library_manager/pages/login_page.dart';
+import 'package:library_manager/widgets/bottom_nav_bar.dart'; 
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -25,11 +30,17 @@ class AppDrawer extends StatelessWidget {
           ),
 
           ListTile(
+            onTap: (){
+              Navigator.pushNamed(context, BottomNavBar.routeName);
+            },
             leading:  Icon(Icons.home_sharp),
               title: Text("Home"),
           ),
           
             ListTile(
+              onTap: () {
+                Navigator.pushNamed(context, DashbordPage.routeName);
+              },
             leading:  Icon(Icons.dashboard),
               title: Text("Dashboard"),
           ),
@@ -64,7 +75,22 @@ class AppDrawer extends StatelessWidget {
           Divider(),
 
 
-          OutlinedButton(onPressed: (){}, child: Text("LogOut"))
+          OutlinedButton(
+             style: OutlinedButton.styleFrom(
+              primary: Colors.purple,
+               side: BorderSide(color: Colors.purple),
+               shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10)
+               )
+             ),
+            onPressed: (){
+
+              setLogInStatus(false);
+              Navigator.pushReplacementNamed(context, LoginPage.routeName);
+              
+
+
+          }, child: Text("LogOut"))
 
 
 

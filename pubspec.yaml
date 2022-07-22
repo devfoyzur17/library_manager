@@ -41,6 +41,7 @@ dependencies:
   path:
   provider:
   shared_preferences: 
+  flutter_image_slideshow: ^0.1.2
 
 dev_dependencies:
   flutter_test:
