@@ -1,11 +1,16 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:library_manager/auth_pref.dart';
+import 'package:library_manager/pages/home_page.dart';
+import 'package:library_manager/pages/sign_up_page.dart';
+import 'package:library_manager/widgets/bottom_nav_bar.dart';
 
 class LoginPage extends StatefulWidget {
-  static const routeName = 'login-page';
+  static const routeName = 'login-screen';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
@@ -17,7 +22,6 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   final formKey = GlobalKey<FormState>();
- 
 
   @override
   void dispose() {
@@ -25,7 +29,8 @@ class _LoginPageState extends State<LoginPage> {
     passwordController.dispose();
     super.dispose();
   }
-   bool _isObscure = true;
+
+  bool _isObscure = true;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                             bottomLeft: Radius.circular(100))),
                   ),
                 ),
-                     Text(
+                Text(
                   "Admin Login",
                   textAlign: TextAlign.center,
                   style: TextStyle(
@@ -68,12 +73,12 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20,
                 ),
-           
+
                 // todo This is email textField section
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
-                    controller: passwordController,
+                    controller: emailController,
                     style: TextStyle(
                         color: Colors.purple, fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
@@ -82,8 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                         contentPadding: EdgeInsets.only(left: 10),
                         focusColor: Colors.white,
                         prefixIcon: Icon(
-                          Icons.account_circle_outlined,
-                           
+                          Icons.email,
                         ),
                         hintText: "Enter your email",
                         hintStyle: TextStyle(
@@ -105,35 +109,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 // todo this is password textField section
-                 Padding(
-                  padding: const EdgeInsets.only(top: 8,left: 8,right: 8),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
                   child: TextFormField(
                     obscureText: _isObscure,
-                    controller: emailController,
+                    controller: passwordController,
                     style: TextStyle(
                         color: Colors.purple, fontWeight: FontWeight.w500),
                     decoration: InputDecoration(
                         filled: true,
-                        
                         fillColor: Color(0xffe6e6e6),
                         contentPadding: EdgeInsets.only(left: 10),
                         focusColor: Colors.white,
                         prefixIcon: Icon(
                           Icons.lock,
-                           
                         ),
                         suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
+                          icon: Icon(
+                            _isObscure
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                           ),
+                          onPressed: () {
+                            setState(() {
+                              _isObscure = !_isObscure;
+                            });
+                          },
+                        ),
                         hintText: "Enter your password",
                         hintStyle: TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.normal),
@@ -144,7 +146,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'This field must not be empty';
                       }
-                      if (value.length > 8) {
+                      if (value.length < 8) {
                         return 'password must be in 8 character';
                       } else {
                         return null;
@@ -154,29 +156,59 @@ class _LoginPageState extends State<LoginPage> {
                 ),
 
                 Align(
-                  alignment: Alignment.topRight,
-                  child: TextButton(onPressed: (){}, child: Text("forget password?",))),
+                    alignment: Alignment.topRight,
+                    child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "forget password?",
+                        ))),
 
-                   Padding(
-                     padding: const EdgeInsets.symmetric(horizontal: 80,vertical: 20),
-                     child: ElevatedButton(onPressed: (){},
-                     
-                     style: ButtonStyle(
-                        shape: MaterialStateProperty.all(
-                          
-                          RoundedRectangleBorder(
-                            
-                            borderRadius: BorderRadius.circular(20)
-                          )
-                        )
-                     ),
-                      child: Text("LogIn", style: TextStyle(fontSize: 16),)),
-                   )
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
+                  child: ElevatedButton(
+                      onPressed: _chechValidet,
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20)))),
+                      child: Text(
+                        "LogIn",
+                        style: TextStyle(fontSize: 16),
+                      )),
+                ),
+
+                RichText(
+                  textAlign: TextAlign.center,
+            text: TextSpan(children: [
+              TextSpan(
+                text: 'You have no account? ',
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+              ),
+              TextSpan(
+              text: ' Sign UP',
+              style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),
+              
+              recognizer: TapGestureRecognizer()
+                ..onTap = () { 
+
+                  Navigator.pushNamed(context, SignUpPage.routeName);
+
+                }),
+            ]),
+          ),
               ],
             )),
-
-        // Spacer(),
       ),
     );
+  }
+
+  void _chechValidet() {
+    if (formKey.currentState!.validate()) {
+      setLogInStatus(true);
+      Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
+    }
   }
 }
