@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:library_manager/pages/add_new_book_page.dart';
 import 'package:library_manager/pages/dashbord_page.dart';
 import 'package:library_manager/pages/login_page.dart';
 import 'package:library_manager/pages/home_page.dart';
@@ -33,6 +34,8 @@ class MyApp extends StatelessWidget {
         HomePage.routeName :(context) => const HomePage(),
         ReaderPage.routeName : (context) => const ReaderPage(),
         DashbordPage.routeName : (context) => const DashbordPage(),
+        AddNewBookPage.routeName : (context) => const AddNewBookPage(),
+
         
         
       },
