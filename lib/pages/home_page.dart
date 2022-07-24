@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-      categoryItemList =  Provider.of<LibraryProvider>(context).categoryItemList;
+      categoryItemList =  Provider.of<LibraryProvider>(context,listen: false).categoryItemList;
     super.didChangeDependencies();
   }
   @override

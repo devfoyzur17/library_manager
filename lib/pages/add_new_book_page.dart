@@ -3,7 +3,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart'; 
-import 'package:image_picker/image_picker.dart'; 
+import 'package:image_picker/image_picker.dart';
+import 'package:library_manager/models/admin_db_model.dart'; 
 import 'package:library_manager/widgets/custom_appbar.dart';
 
 class AddNewBookPage extends StatefulWidget {
@@ -348,5 +349,8 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
   }
 
   void _saveBook() {
+    if(formKey.currentState!.validate()){
+      
+    }
   }
 }

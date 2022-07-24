@@ -1,12 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart'; 
 import 'package:library_manager/widgets/app_drawer.dart';
 import 'package:library_manager/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
 
 import '../models/category_model.dart';
 import '../providers/library_provider.dart';
+import '../widgets/category_item.dart';
 
 class AllBookCategoryPage extends StatefulWidget {
   static const routeName = "all-book-category";
@@ -28,20 +29,25 @@ class _AllBookCategoryPageState extends State<AllBookCategoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppbar("Category"),
-      drawer: AppDrawer(),
+        
 
-      body: ListView.builder(
-        itemCount: categoryItemList!.length,
-        itemBuilder: (context,index){
-        return Card(
-          elevation: 1,
-          child: ListTile(
-            leading: Image.asset(categoryItemList![index].image,height: 30,),
-            title: Text(categoryItemList![index].name, style: TextStyle(color: Colors.deepOrange, fontWeight: FontWeight.w500, letterSpacing: 1),),
-            
-          ),
-        );
-      }),
+      body:Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: GridView.builder(
+                  
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: categoryItemList!.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        childAspectRatio: 5 / 6,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20),
+                    itemBuilder: (context, index) => CategoryItem(menuIcon: categoryItemList![index].image, menuTitle: categoryItemList![index].name, 
+                    )
+                
+                    ),
+      ),
 
     );
   }
