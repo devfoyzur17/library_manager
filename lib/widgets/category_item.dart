@@ -1,13 +1,13 @@
 
 // ignore_for_file: sort_child_properties_last
-
-import 'package:flutter/cupertino.dart';
+ 
 import 'package:flutter/material.dart'; 
 
 class CategoryItem extends StatefulWidget {
   final String menuIcon;
   final String menuTitle;
-  const CategoryItem({Key? key, required this.menuIcon, required this.menuTitle}) : super(key: key);
+ 
+  const CategoryItem({Key? key, required this.menuIcon, required this.menuTitle }) : super(key: key);
 
   @override
   State<CategoryItem> createState() => _CategoryItemState();
@@ -17,8 +17,7 @@ class _CategoryItemState extends State<CategoryItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(7),
-      margin: EdgeInsets.all(5),
+      padding: EdgeInsets.all(7), 
       
       height: 120,
       width: 90,

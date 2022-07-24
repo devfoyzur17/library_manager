@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart'; 
 import 'package:library_manager/pages/home_page.dart';
+import 'package:library_manager/pages/library_members.dart';
 import 'package:library_manager/pages/reader_page.dart';
 import 'package:library_manager/widgets/app_drawer.dart';
 
@@ -16,14 +17,14 @@ class _BottomNavBarState extends State<BottomNavBar> {
   List _widgetOptions = [
    const HomePage(),
    const ReaderPage(),
-    Icon(Icons.add), 
+   const LibraryMembers(),
     
   ];
   @override
   Widget build(BuildContext context) {
    return  Scaffold(
      
-      drawer: AppDrawer(),
+      //drawer: AppDrawer(),
 
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -45,8 +46,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
               label: 'Reader',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.favorite_border),
-              label: 'Favorite',
+              icon: ImageIcon(
+                AssetImage("assets/images/member.png",),
+              ),
+              label: 'Members',
             ),
           ],
           type: BottomNavigationBarType.fixed,
