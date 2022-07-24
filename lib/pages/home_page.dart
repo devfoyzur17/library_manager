@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
 
 import 'package:flutter/material.dart';
+import 'package:library_manager/models/category_model.dart';
+import 'package:library_manager/providers/library_provider.dart';
 import 'package:library_manager/widgets/app_drawer.dart';
 import 'package:library_manager/widgets/category_item.dart';
 import 'package:library_manager/widgets/custom_appbar.dart';
-import 'package:library_manager/widgets/slider.dart'; 
+import 'package:library_manager/widgets/slider.dart';
+import 'package:provider/provider.dart'; 
 
 class HomePage extends StatefulWidget {
   static const routeName = 'home-page';
@@ -15,6 +18,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<CategoryItemModel>? categoryItemList;
+
+  @override
+  void didChangeDependencies() {
+      categoryItemList =  Provider.of<LibraryProvider>(context).categoryItemList;
+    super.didChangeDependencies();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +37,32 @@ class _HomePageState extends State<HomePage> {
           children: [
             TopSlider(),
             
-            Text("Category", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1),),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text("Category", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1),),
+                TextButton(onPressed: (){}, child: Text("View All>>"))
+              ],
+            ),
 
             SizedBox(height: 15,),
 
-            SizedBox(
-              height: 120,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder:  (context, index) => CategoryItem(menuIcon: 'assets/images/books.png', menuTitle: "History") ),
+                 Container(
+              height: 500,
+              child: GridView.builder(
+                
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 8,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 3 / 4,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemBuilder: (context, index) => CategoryItem(menuIcon: categoryItemList![index].image, menuTitle: categoryItemList![index].name, 
+                  )
+              
+                  ),
             )
 
 
