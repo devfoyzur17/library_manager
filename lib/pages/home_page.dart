@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:library_manager/models/category_model.dart';
+import 'package:library_manager/pages/all_books_category.dart';
 import 'package:library_manager/providers/library_provider.dart';
 import 'package:library_manager/widgets/app_drawer.dart';
 import 'package:library_manager/widgets/category_item.dart';
@@ -41,7 +42,9 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text("Category", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500,letterSpacing: 1),),
-                TextButton(onPressed: (){}, child: Text("View All>>"))
+                TextButton(onPressed: (){
+                  Navigator.pushNamed(context, AllBookCategoryPage.routeName);
+                }, child: Text("View All>>"))
               ],
             ),
 

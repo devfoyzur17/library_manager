@@ -16,7 +16,7 @@ class TopSlider extends StatelessWidget {
             width: double.infinity,
             height: 180,
             initialPage: 0,
-            indicatorColor: Colors.blue,
+            indicatorColor: Colors.purple,
             indicatorBackgroundColor: Colors.grey,
             onPageChanged: (value) {
               debugPrint('Page changed: $value');

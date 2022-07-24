@@ -9,15 +9,15 @@ class LibraryProvider extends ChangeNotifier{
       List<CategoryItemModel> categoryItemList =[
         CategoryItemModel(image: "assets/images/books.png", name: "CSE"),
         CategoryItemModel(image: "assets/images/books.png", name: "EEE"),
-        CategoryItemModel(image: "assets/images/books.png", name: "MECHANICAL"),
-        CategoryItemModel(image: "assets/images/books.png", name: "TEXTILE"),
-        CategoryItemModel(image: "assets/images/books.png", name: "STORY"),
-        CategoryItemModel(image: "assets/images/books.png", name: "HISTORY"),
-        CategoryItemModel(image: "assets/images/books.png", name: "POEM"),
-        CategoryItemModel(image: "assets/images/books.png", name: "ISLAMIC"),
-        CategoryItemModel(image: "assets/images/books.png", name: "MOTIVATIONAL"),
-        CategoryItemModel(image: "assets/images/books.png", name: "HORROR"),
-        CategoryItemModel(image: "assets/images/books.png", name: "OTHERS"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Mechanical"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Textile"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Story"),
+        CategoryItemModel(image: "assets/images/books.png", name: "History"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Poem"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Islamic"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Motivational"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Horror"),
+        CategoryItemModel(image: "assets/images/books.png", name: "Others"),
       ];
 
 

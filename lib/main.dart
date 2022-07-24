@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
+import 'package:library_manager/pages/all_books_category.dart';
 import 'package:library_manager/pages/dashbord_page.dart';
+import 'package:library_manager/pages/delayed_books.dart';
 import 'package:library_manager/pages/library_members.dart';
 import 'package:library_manager/pages/login_page.dart';
 import 'package:library_manager/pages/home_page.dart';
@@ -42,9 +44,11 @@ class MyApp extends StatelessWidget {
         BottomNavBar.routeName : (context) => const BottomNavBar(),
         HomePage.routeName :(context) => const HomePage(),
         ReaderPage.routeName : (context) => const ReaderPage(),
+        DelayedBooksPage.routeName : (context) => const DelayedBooksPage(),
         DashbordPage.routeName : (context) => const DashbordPage(),
         AddNewBookPage.routeName : (context) => const AddNewBookPage(),
         LibraryMembers.routeName : (context) => const LibraryMembers(),
+        AllBookCategoryPage.routeName : (context) => const AllBookCategoryPage(),
 
         
         

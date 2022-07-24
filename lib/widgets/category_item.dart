@@ -22,7 +22,7 @@ class _CategoryItemState extends State<CategoryItem> {
       height: 120,
       width: 90,
       child: Container(
-        padding: EdgeInsets.all(7),
+        padding: EdgeInsets.all(6),
 
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,

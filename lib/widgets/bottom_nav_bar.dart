@@ -1,8 +1,10 @@
-import 'package:flutter/material.dart'; 
+// ignore_for_file: prefer_final_fields
+
+import 'package:flutter/material.dart';
+import 'package:library_manager/pages/delayed_books.dart'; 
 import 'package:library_manager/pages/home_page.dart';
 import 'package:library_manager/pages/library_members.dart';
-import 'package:library_manager/pages/reader_page.dart';
-import 'package:library_manager/widgets/app_drawer.dart';
+import 'package:library_manager/pages/reader_page.dart'; 
 
 class BottomNavBar extends StatefulWidget {
   static const routeName = 'bottom-nav-bar';
@@ -17,6 +19,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   List _widgetOptions = [
    const HomePage(),
    const ReaderPage(),
+   
+   const DelayedBooksPage(),
    const LibraryMembers(),
     
   ];
@@ -47,6 +51,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
             ),
             BottomNavigationBarItem(
               icon: ImageIcon(
+                AssetImage("assets/images/delay.png",),
+              ),
+              label: 'Delayed',
+            ),
+             BottomNavigationBarItem(
+              icon: ImageIcon(
                 AssetImage("assets/images/member.png",),
               ),
               label: 'Members',
@@ -56,7 +66,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           currentIndex: _selectedIndex,
           unselectedItemColor: Color.fromARGB(255, 104, 103, 103),
           selectedItemColor: Colors.purple,
-          // iconSize: 25,
+           iconSize: 22,
 
           onTap: _onItemTapped,
           
