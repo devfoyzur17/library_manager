@@ -1,11 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_build_context_synchronously
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:library_manager/pages/login_page.dart'; 
+import 'package:library_manager/models/admin_db_model.dart';
+import 'package:library_manager/pages/login_page.dart';
+import 'package:library_manager/providers/library_provider.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
-  static const routeName ="sign-up";
+  static const routeName = "sign-up";
   const SignUpPage({Key? key}) : super(key: key);
 
   @override
@@ -13,7 +16,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
@@ -48,16 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             bottomLeft: Radius.circular(100))),
                   ),
                 ),
-                // Text(
-                //   "Admin SignUP",
-                //   textAlign: TextAlign.center,
-                //   style: TextStyle(
-                //       fontSize: 22,
-                //       fontWeight: FontWeight.bold,
-                //       letterSpacing: 1,
-                //       wordSpacing: 2,
-                //       fontStyle: FontStyle.italic),
-                // ),
+             
                 SizedBox(
                   height: 20,
                 ),
@@ -70,9 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 SizedBox(
                   height: 20,
                 ),
-                
+
                 // todo This is name textField section
-                  Padding(
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: TextFormField(
                     controller: nameController,
@@ -104,8 +97,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     },
                   ),
                 ),
-
-               
 
                 // todo This is email textField section
                 Padding(
@@ -188,13 +179,11 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
 
-                
-
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
                   child: ElevatedButton(
-                      onPressed: _chechValidet,
+                      onPressed: _saveAdminInfo,
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all(
                               RoundedRectangleBorder(
@@ -207,36 +196,44 @@ class _SignUpPageState extends State<SignUpPage> {
 
                 RichText(
                   textAlign: TextAlign.center,
-            text: TextSpan(children: [
-              TextSpan(
-                text: 'You have account? ',
-                style: TextStyle(
-                  color: Colors.black,
+                  text: TextSpan(children: [
+                    TextSpan(
+                      text: 'You have account? ',
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                    TextSpan(
+                        text: ' Log In',
+                        style: TextStyle(
+                            color: Colors.purple, fontWeight: FontWeight.w500),
+                        recognizer: TapGestureRecognizer()
+                          ..onTap = () {
+                            Navigator.pushNamed(context, LoginPage.routeName);
+                          }),
+                  ]),
                 ),
-              ),
-              TextSpan(
-              text: ' Log In',
-              style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),
-              
-              recognizer: TapGestureRecognizer()
-                ..onTap = () { 
-
-                  Navigator.pushNamed(context, LoginPage.routeName);
-
-                }),
-            ]),
-          ),
               ],
             )),
       ),
     );
-    
   }
 
-  void _chechValidet() {
+  void _saveAdminInfo() async {
     if (formKey.currentState!.validate()) {
-       
-      Navigator.pushReplacementNamed(context, LoginPage.routeName);
+      final adminDatabaseModel = AdminDatabaseModel(
+        adminImage: null,
+          adminName: nameController.text,
+          adminEmail: emailController.text,
+          adminPassword: passwordController.text);
+        //  print(adminDatabaseModel);
+
+          final ststus = await Provider.of<LibraryProvider>(context,listen: false).addNewAdmin(adminDatabaseModel);
+          if(ststus){
+            Navigator.pushReplacementNamed(context, LoginPage.routeName);
+          }
+
+
     }
   }
 }
