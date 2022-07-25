@@ -4,8 +4,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart'; 
 import 'package:image_picker/image_picker.dart';
-import 'package:library_manager/models/admin_db_model.dart'; 
+import 'package:library_manager/models/admin_db_model.dart';
+import 'package:library_manager/providers/library_provider.dart'; 
 import 'package:library_manager/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
+
+import '../models/book_model.dart';
 
 class AddNewBookPage extends StatefulWidget {
   static const routeName = "add-new-book";
@@ -348,8 +352,26 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
     }
   }
 
-  void _saveBook() {
+  void _saveBook() async{
     if(formKey.currentState!.validate()){
+
+      final bookModel = BookModel(
+        bookImage: imagePatch.toString(),
+        bookName: bookNameController.text,
+        authorName: authorNameController.text,
+        bookQuantity:  int.parse(bookQuantityController.text),
+        bookDescription: discriptionController.text,
+        bookCategory: bookCategory
+      );
+
+     final status = await Provider.of<LibraryProvider>(context,listen: false).addNewBook(bookModel);
+       if(status){
+            Navigator.pop(context);
+
+            print(bookModel.toString());
+
+          }
+
       
     }
   }

@@ -228,8 +228,8 @@ class _SignUpPageState extends State<SignUpPage> {
           adminEmail: emailController.text,
           adminPassword: passwordController.text); 
 
-          final ststus = await Provider.of<LibraryProvider>(context,listen: false).addNewAdmin(adminDatabaseModel);
-          if(ststus){
+          final status = await Provider.of<LibraryProvider>(context,listen: false).addNewAdmin(adminDatabaseModel);
+          if(status){
             Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
 
             print(adminDatabaseModel.toString());

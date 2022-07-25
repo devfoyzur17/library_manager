@@ -1,10 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:library_manager/Database/admin_bd_helper.dart';
+import 'package:library_manager/Database/book_db_helper.dart';
 import 'package:library_manager/models/admin_db_model.dart';
+import 'package:library_manager/models/book_model.dart';
 import 'package:library_manager/models/category_model.dart';
 
 class LibraryProvider extends ChangeNotifier {
   List<AdminDatabaseModel> adminList = [];
+  List<BookModel> booksList = [];
 
   List<CategoryItemModel> categoryItemList = [
     CategoryItemModel(image: "assets/images/books.png", name: "CSE"),
@@ -31,18 +34,21 @@ class LibraryProvider extends ChangeNotifier {
     return false;
   }
 
+  Future<bool> addNewBook(BookModel bookModel) async {
+    final rowId = await BookDBHelper.insertBook(bookModel);
+    if (rowId > 0) {
+      bookModel.id = rowId;
+      booksList.add(bookModel);
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
 
-
-
-    getValidAdmin(String adminEmail){
-
+  getValidAdmin(String adminEmail) {
     AdminDBHelper.getValidAdminInfo(adminEmail).then((value) {
-        adminList = value;
-        notifyListeners();
-        
-
+      adminList = value;
+      notifyListeners();
     });
- 
-
   }
 }
