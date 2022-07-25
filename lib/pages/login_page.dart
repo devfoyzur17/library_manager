@@ -8,6 +8,10 @@ import 'package:library_manager/auth_pref.dart';
 import 'package:library_manager/pages/home_page.dart';
 import 'package:library_manager/pages/sign_up_page.dart';
 import 'package:library_manager/widgets/bottom_nav_bar.dart';
+import 'package:provider/provider.dart';
+
+import '../models/admin_db_model.dart';
+import '../providers/library_provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const routeName = 'login-screen';
@@ -205,10 +209,21 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  void _chechValidet() {
+void _chechValidet(){
     if (formKey.currentState!.validate()) {
-      setLogInStatus(true);
-      Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
+       Provider.of<LibraryProvider>(context, listen: false)
+          .getValidAdmin(emailController.text);
+      List<AdminDatabaseModel> adminList =
+          Provider.of<LibraryProvider>(context, listen: false).adminList;
+
+      if (adminList.isNotEmpty && (adminList[0].adminPassword == passwordController.text)) {
+        setLogInStatus(true);
+         Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
+      }
+
+      else{
+        print("Button Clicked");
+      }
     }
   }
 }

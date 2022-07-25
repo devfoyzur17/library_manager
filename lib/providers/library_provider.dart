@@ -30,4 +30,19 @@ class LibraryProvider extends ChangeNotifier {
     }
     return false;
   }
+
+
+
+
+    getValidAdmin(String adminEmail){
+
+    AdminDBHelper.getValidAdminInfo(adminEmail).then((value) {
+        adminList = value;
+        notifyListeners();
+        
+
+    });
+ 
+
+  }
 }
