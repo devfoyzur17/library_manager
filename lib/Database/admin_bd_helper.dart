@@ -7,7 +7,7 @@ class AdminDBHelper {
   create table $adminTableName(
   $adminTableId integer primary key,
   $adminTableAdminImage text,
-  $adminTableName text,
+  $adminTableAdminName text,
   $adminTableAdminEmail text,
   $adminTableAdminPassword text
 )
@@ -15,7 +15,7 @@ class AdminDBHelper {
 
   static Future<Database> open() async {
     final root = await getDatabasesPath();
-    final dbPath = path.join(root, "admin_Info.db");
+    final dbPath = path.join(root, "admin_info.db");
     return openDatabase(dbPath, version: 1, onCreate: (db, version) {
       db.execute(_createAdminInfoTable);
     });

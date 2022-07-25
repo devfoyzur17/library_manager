@@ -39,4 +39,9 @@ class AdminDatabaseModel {
           adminName: map[adminTableAdminName],
           adminEmail: map[adminTableAdminEmail],
           adminPassword: map[adminTableAdminPassword]);
+
+  @override
+  String toString() {
+    return 'AdminDatabaseModel{id: $id, adminImage: $adminImage, adminName: $adminName, adminEmail: $adminEmail, adminPassword: $adminPassword}';
+  }
 }
