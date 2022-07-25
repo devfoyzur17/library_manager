@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:library_manager/models/admin_db_model.dart';
 import 'package:library_manager/pages/login_page.dart';
 import 'package:library_manager/providers/library_provider.dart';
+import 'package:library_manager/widgets/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -225,12 +226,14 @@ class _SignUpPageState extends State<SignUpPage> {
         adminImage: null,
           adminName: nameController.text,
           adminEmail: emailController.text,
-          adminPassword: passwordController.text);
-        //  print(adminDatabaseModel);
+          adminPassword: passwordController.text); 
 
           final ststus = await Provider.of<LibraryProvider>(context,listen: false).addNewAdmin(adminDatabaseModel);
           if(ststus){
-            Navigator.pushReplacementNamed(context, LoginPage.routeName);
+            Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
+
+            print(adminDatabaseModel.toString());
+
           }
 
 
