@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
-import 'package:library_manager/Database/admin_bd_helper.dart';
+import 'package:flutter/cupertino.dart'; 
 import 'package:library_manager/Database/book_db_helper.dart';
+import 'package:library_manager/Database/member_db_helper.dart';
 import 'package:library_manager/models/admin_db_model.dart';
 import 'package:library_manager/models/book_model.dart';
 import 'package:library_manager/models/category_model.dart';
+import 'package:library_manager/models/member_model.dart';
+
+import '../Database/admin_db_helper.dart';
 
 class LibraryProvider extends ChangeNotifier {
   List<AdminDatabaseModel> adminList = [];
   List<BookModel> booksList = [];
   List<BookModel> cseBooksList = [];
+  List<MemberModel> memberList =[];
 
   List<CategoryItemModel> categoryItemList = [
     CategoryItemModel(image: "assets/images/books.png", name: "CSE"),
@@ -45,10 +49,25 @@ class LibraryProvider extends ChangeNotifier {
     }
     return false;
   }
+    Future<bool> addNewMember(MemberModel memberModel) async {
+    final rowId = await MemberDBHelper.insertMember(memberModel);
+    if (rowId > 0) {
+      memberModel.id = rowId;
+      memberList.add(memberModel);
+      notifyListeners();
+      return true;
+    }
+    return false;
+  }
 
   Future<AdminDatabaseModel> getValidAdmin(String adminEmail) {
     return AdminDBHelper.getValidAdminInfo(adminEmail);
   }
+
+  Future<MemberModel> getValidMember(String adminEmail) {
+    return MemberDBHelper.getValidMemberInfo(adminEmail);
+  }
+
   getAllCSEBooks(){
     BookDBHelper.getAllCSEBooks().then((value) {
       cseBooksList = value;

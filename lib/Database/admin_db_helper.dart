@@ -29,7 +29,7 @@ class AdminDBHelper {
     static Future<AdminDatabaseModel> getValidAdminInfo(String adminEmail) async {
     final db = await open();
     final List<Map<String, dynamic>> mapList = await db.query(adminTableName,where: "$adminTableAdminEmail = ?", whereArgs: [adminEmail]);
-    return AdminDatabaseModel.fromMap(mapList.first);
+    return mapList.isNotEmpty ?   AdminDatabaseModel.fromMap( mapList.first) : AdminDatabaseModel(adminName: "", adminEmail: "", adminPassword: "");
   }
 
 }

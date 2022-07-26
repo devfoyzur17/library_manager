@@ -223,9 +223,7 @@ void _chechValidet() async{
          Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
       }
 
-      else{
-        print("Button Clicked");
-      }
+      
     }
   }
 }

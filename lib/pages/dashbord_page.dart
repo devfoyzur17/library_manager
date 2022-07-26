@@ -5,6 +5,7 @@ import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:library_manager/pages/add_member.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
+import 'package:library_manager/pages/check_valid_member_page.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/custom_appbar.dart';
@@ -133,7 +134,7 @@ class _DashbordPageState extends State<DashbordPage> {
                     InkWell(
                       onTap: (){
 
-                     //   Navigator.pushNamed(context, AddNewBookPage.routeName);
+                        Navigator.pushNamed(context, CheckValidMemberPage.routeName);
 
                       },
                       child: Image.asset("assets/images/add_user.png", height: 100,)),

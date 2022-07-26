@@ -1,10 +1,14 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors
+// ignore_for_file: non_constant_identifier_names, prefer_const_constructors, use_build_context_synchronously
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; 
+import 'package:image_picker/image_picker.dart';
+import 'package:library_manager/providers/library_provider.dart'; 
 import 'package:library_manager/widgets/custom_appbar.dart';
+import 'package:provider/provider.dart';
+
+import '../models/member_model.dart';
 
 class AddMember extends StatefulWidget {
   static const routeName = "add-member";
@@ -344,7 +348,28 @@ class _AddMemberState extends State<AddMember> {
     }
   }
   
-  void _addMember() {
+  void _addMember() async {
+      if(formKey.currentState!.validate()){
 
+        final memberModel = MemberModel(
+           memberImage: imagePatch.toString(),
+           memberName: memberNameController.text,
+           memberEmail: memberEmailController.text,
+           memberPhone: memberPhoneController.text,
+           memberAddress: addressController.text,
+           memberDept: deptCategory
+        );
+
+       final status = await  Provider.of<LibraryProvider>(context,listen: false).addNewMember(memberModel);
+        if(status){
+
+          Navigator.pop(context);
+          print(memberModel.toString());
+
+        }
+
+      }
   }
+
+
   }

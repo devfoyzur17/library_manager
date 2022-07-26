@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:library_manager/pages/add_member.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
+import 'package:library_manager/pages/add_reader.dart';
 import 'package:library_manager/pages/all_books_category.dart';
 import 'package:library_manager/pages/book_details.dart';
+import 'package:library_manager/pages/check_valid_member_page.dart';
 import 'package:library_manager/pages/dashbord_page.dart';
 import 'package:library_manager/pages/delayed_books.dart';
 import 'package:library_manager/pages/library_members.dart';
@@ -55,6 +57,8 @@ class MyApp extends StatelessWidget {
         ViewAllBooks.routeName : (context) => const ViewAllBooks(),
         BookDetails.routeName : (context) => const BookDetails(),
         AddMember.routeName : (context) => const AddMember(),
+        CheckValidMemberPage.routeName :(context) => const CheckValidMemberPage(),
+        AddReaderPage.routeName :(context) => const AddReaderPage(),
 
         
         

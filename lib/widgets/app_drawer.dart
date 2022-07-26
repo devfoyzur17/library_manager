@@ -46,20 +46,21 @@ class AppDrawer extends StatelessWidget {
           ),
   
             ListTile(
-            leading:  Icon(Icons.notifications
+            leading:  Icon(Icons.my_library_books
             ),
-              title: Text("Notification"),
+              title: Text("About Library"),
           ),
              ListTile(
             leading:  Icon(Icons.notifications
             ),
               title: Text("Notification"),
           ),
-            ListTile(
-            leading:  Icon(Icons.notifications
+             ListTile(
+            leading:  Icon(Icons.mode_edit_outline_outlined
             ),
-              title: Text("Notification"),
+              title: Text("Update Admin Info"),
           ),
+         
          
             ListTile(
             leading:  Icon(Icons.location_on
