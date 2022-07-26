@@ -32,5 +32,15 @@ class BookDBHelper {
     
   }
 
+  static Future<List<BookModel>> getAllCSEBooks() async {
+    final db = await open();
+    final List<Map<String, dynamic>> mapList = await db.query(booksTableName,where: "$booksTableBookCategoryColName = ?", whereArgs: ["CSE"]);
+    return List.generate(mapList.length, (index) => BookModel.fromMap(mapList[index]));
+
+  }
+
+
+
+
 
 }

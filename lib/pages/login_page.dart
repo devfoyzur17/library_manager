@@ -27,6 +27,8 @@ class _LoginPageState extends State<LoginPage> {
 
   final formKey = GlobalKey<FormState>();
 
+
+
   @override
   void dispose() {
     emailController.dispose();
@@ -209,14 +211,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-void _chechValidet(){
+void _chechValidet() async{
     if (formKey.currentState!.validate()) {
-       Provider.of<LibraryProvider>(context, listen: false)
+    final model = await Provider.of<LibraryProvider>(context, listen: false)
           .getValidAdmin(emailController.text);
-      List<AdminDatabaseModel> adminList =
-          Provider.of<LibraryProvider>(context, listen: false).adminList;
 
-      if (adminList.isNotEmpty && (adminList[0].adminPassword == passwordController.text)) {
+
+
+      if (model.adminPassword == passwordController.text) {
         setLogInStatus(true);
          Navigator.pushReplacementNamed(context, BottomNavBar.routeName);
       }

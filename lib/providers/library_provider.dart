@@ -8,6 +8,7 @@ import 'package:library_manager/models/category_model.dart';
 class LibraryProvider extends ChangeNotifier {
   List<AdminDatabaseModel> adminList = [];
   List<BookModel> booksList = [];
+  List<BookModel> cseBooksList = [];
 
   List<CategoryItemModel> categoryItemList = [
     CategoryItemModel(image: "assets/images/books.png", name: "CSE"),
@@ -45,10 +46,15 @@ class LibraryProvider extends ChangeNotifier {
     return false;
   }
 
-  getValidAdmin(String adminEmail) {
-    AdminDBHelper.getValidAdminInfo(adminEmail).then((value) {
-      adminList = value;
+  Future<AdminDatabaseModel> getValidAdmin(String adminEmail) {
+    return AdminDBHelper.getValidAdminInfo(adminEmail);
+  }
+  getAllCSEBooks(){
+    BookDBHelper.getAllCSEBooks().then((value) {
+      cseBooksList = value;
       notifyListeners();
+
     });
   }
+
 }

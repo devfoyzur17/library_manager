@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:library_manager/pages/add_member.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
 
 import '../widgets/app_drawer.dart';
@@ -24,9 +25,10 @@ class _DashbordPageState extends State<DashbordPage> {
       drawer: AppDrawer(),
 
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 10),
         child: ListView(
           children: [
+            SizedBox(height: 10,),
 
             Row(
               children: [
@@ -135,6 +137,34 @@ class _DashbordPageState extends State<DashbordPage> {
 
                       },
                       child: Image.asset("assets/images/add_user.png", height: 100,)),
+                  ],
+                ),
+                
+              ),
+            ),
+
+             Card(
+              elevation: 5,
+              shadowColor: Colors.purple.withOpacity(0.5),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+              
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(vertical: 25),
+
+                title: Text("Add new member to the library",textAlign: TextAlign.center,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,letterSpacing: 1,wordSpacing: 1),),
+                 
+                subtitle: Column(
+                  children: [
+                    SizedBox(height: 25,),
+                    InkWell(
+                      onTap: (){
+
+                       Navigator.pushNamed(context, AddMember.routeName);
+
+                      },
+                      child: Image.asset("assets/images/addmember.png", height: 100,)),
                   ],
                 ),
                 
