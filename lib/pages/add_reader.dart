@@ -4,8 +4,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:library_manager/models/member_model.dart';
+import 'package:library_manager/models/reader_model.dart';
 import 'package:library_manager/widgets/custom_appbar.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/library_provider.dart';
 
 class AddReaderPage extends StatefulWidget {
   static const routeName = 'add-reader-page';
@@ -24,7 +28,6 @@ class _AddReaderPageState extends State<AddReaderPage> {
   String? _ReturnDate;
 
 
-
   @override
   void dispose() {
     nameController.dispose(); 
@@ -40,7 +43,7 @@ class _AddReaderPageState extends State<AddReaderPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar("Add Reader"),
+      appBar: CustomAppbar("Add Reader", context),
       body: Align(
         alignment: Alignment.topCenter,
         child: Column(children: [
@@ -49,12 +52,14 @@ class _AddReaderPageState extends State<AddReaderPage> {
           ),
           ClipRRect(
               borderRadius: BorderRadius.circular(100),
-              child: Image.file(
+              child:   Image.file(
                 File(member!.memberImage),
                 height: 100,
                 width: 100,
                 fit: BoxFit.cover,
-              )),
+              )
+              
+              ),
           SizedBox(
             height: 5,
           ),
@@ -247,31 +252,56 @@ class _AddReaderPageState extends State<AddReaderPage> {
    void _showGiveDatePicker() async {
     DateTime? selectedDate = await showDatePicker(
         context: context,
-        initialDate: DateTime(2000),
-        firstDate: DateTime(1971),
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2020),
         lastDate: DateTime.now());
 
     if (selectedDate != null) {
       setState(() {
-        _giveDate = DateFormat.yMMMEd().format(selectedDate);
+        _giveDate = DateFormat("yyy/MM/dd").format(selectedDate);
       });
     }
   }
    void _showReturnDatePicker() async {
     DateTime? selectedDate = await showDatePicker(
         context: context,
-        initialDate: DateTime(2000),
+        initialDate: DateTime.now(),
         firstDate: DateTime(1971),
-        lastDate: DateTime.now());
+        lastDate: DateTime(2030));
 
     if (selectedDate != null) {
       setState(() {
-        _ReturnDate = DateFormat.yMMMMd().format(selectedDate);
+        _ReturnDate = DateFormat("yyy/MM/dd").format(selectedDate);
       });
     }
   }
 
-  void _chechValidet() {
+  void _chechValidet() async {
+
+    if(formKey.currentState!.validate()){
+
+
+      final readerModel = ReaderModel(
+          readerImage: member!.memberImage as String,
+          readerName: member!.memberName,
+          readerEmail: member!.memberEmail,
+          readerPhone: member!.memberPhone,
+          readerAddress: member!.memberAddress,
+          readerDept: member!.memberDept,
+          readerBookName: nameController.text,
+          giveDate: _giveDate.toString(),
+        returnDate: _ReturnDate.toString()
+      );
+
+      final status = await  Provider.of<LibraryProvider>(context,listen: false).addNewReader(readerModel);
+      if(status){
+
+        Navigator.pop(context);
+        print(readerModel.toString());
+
+      }
+
+    }
 
   }
 }

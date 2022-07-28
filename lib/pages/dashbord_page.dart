@@ -1,11 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter/material.dart'; 
 import 'package:library_manager/pages/add_member.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
 import 'package:library_manager/pages/check_valid_member_page.dart';
+import 'package:library_manager/providers/library_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../widgets/app_drawer.dart';
 import '../widgets/custom_appbar.dart';
@@ -21,8 +21,9 @@ class DashbordPage extends StatefulWidget {
 class _DashbordPageState extends State<DashbordPage> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<LibraryProvider>(context, listen: false).getAllBooks();
     return Scaffold(
-       appBar: CustomAppbar("Dashbord"),
+       appBar: CustomAppbar("Dashbord",context),
       drawer: AppDrawer(),
 
       body: Padding(
@@ -34,11 +35,67 @@ class _DashbordPageState extends State<DashbordPage> {
             Row(
               children: [
                  Expanded(
+                   child: Consumer<LibraryProvider>(
+                    builder: (context, provider, _) =>   Card(
+                      
+                                 elevation: 3,
+                                 shadowColor: Colors.purple.withOpacity(0.5),
+                                 shape: RoundedRectangleBorder(
+                                   borderRadius: BorderRadius.circular(10)
+                                 ),
+                                 child: ListTile(
+                   
+                                  contentPadding: EdgeInsets.all(10),
+                                  title: Image.asset("assets/images/boo.png", height: 50,),
+                   
+                                  subtitle: Column(
+                                    children: [
+                                      SizedBox(height: 15,),
+                                      Text("Total Books: ${provider.booksList.length}",textAlign: TextAlign.center,),
+                                    ],
+                                  ),
+                                 ),
+                              
+                                   
+                                 
+                               ),
+                   ),
+                 ),
+                    Expanded(
                    child: Card(
-                               elevation: 5,
+                               elevation: 3,
                                shadowColor: Colors.purple.withOpacity(0.5),
                                shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(20)
+                                 borderRadius: BorderRadius.circular(10)
+                               ),
+                               child: ListTile(
+
+                                contentPadding: EdgeInsets.all(10),
+                                title: Image.asset("assets/images/reade.png", height: 50,),
+
+                                subtitle: Column(
+                                  children: [
+                                    SizedBox(height: 15,),
+                                    Text("Total Members: 50",textAlign: TextAlign.center,),
+                                  ],
+                                ),
+                               ),
+                            
+                                 
+                               
+                             ),
+                 ),
+
+              ],
+            ),
+            Row(
+              children: [
+                 Expanded(
+                   child: Card(
+                               elevation: 3,
+                               shadowColor: Colors.purple.withOpacity(0.5),
+                               shape: RoundedRectangleBorder(
+                                 borderRadius: BorderRadius.circular(10)
                                ),
                                child: ListTile(
 
@@ -48,7 +105,7 @@ class _DashbordPageState extends State<DashbordPage> {
                                 subtitle: Column(
                                   children: [
                                     SizedBox(height: 15,),
-                                    Text("Total 86 Books",textAlign: TextAlign.center,),
+                                    Text("Total Reader: 20",textAlign: TextAlign.center,),
                                   ],
                                 ),
                                ),
@@ -59,10 +116,10 @@ class _DashbordPageState extends State<DashbordPage> {
                  ),
                     Expanded(
                    child: Card(
-                               elevation: 5,
+                               elevation: 3,
                                shadowColor: Colors.purple.withOpacity(0.5),
                                shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(20)
+                                 borderRadius: BorderRadius.circular(10)
                                ),
                                child: ListTile(
 
@@ -72,7 +129,7 @@ class _DashbordPageState extends State<DashbordPage> {
                                 subtitle: Column(
                                   children: [
                                     SizedBox(height: 15,),
-                                    Text("Total 86 Reader",textAlign: TextAlign.center,),
+                                    Text("Delayed Reader: 36",textAlign: TextAlign.center,),
                                   ],
                                 ),
                                ),
@@ -85,7 +142,9 @@ class _DashbordPageState extends State<DashbordPage> {
               ],
             ),
 
-            Divider(),
+            Divider(
+              thickness: 1,
+            ),
             
 
             Card(
@@ -96,7 +155,7 @@ class _DashbordPageState extends State<DashbordPage> {
               ),
               
               child: ListTile(
-                contentPadding: EdgeInsets.symmetric(vertical: 25),
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
 
                 title: Text("Add new books to the library",textAlign: TextAlign.center,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,letterSpacing: 1,wordSpacing: 1),),
                  
@@ -124,7 +183,7 @@ class _DashbordPageState extends State<DashbordPage> {
               ),
               
               child: ListTile(
-                contentPadding: EdgeInsets.symmetric(vertical: 25),
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
 
                 title: Text("Add new reader to the library",textAlign: TextAlign.center,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,letterSpacing: 1,wordSpacing: 1),),
                  
@@ -152,7 +211,7 @@ class _DashbordPageState extends State<DashbordPage> {
               ),
               
               child: ListTile(
-                contentPadding: EdgeInsets.symmetric(vertical: 25),
+                contentPadding: EdgeInsets.symmetric(vertical: 10),
 
                 title: Text("Add new member to the library",textAlign: TextAlign.center,style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,letterSpacing: 1,wordSpacing: 1),),
                  

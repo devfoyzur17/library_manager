@@ -32,7 +32,7 @@ class _CheckValidMemberPageState extends State<CheckValidMemberPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar("Verify Member"),
+      appBar: CustomAppbar("Verify Member",context),
       body: SafeArea(
         child: Form(
             key: formKey,

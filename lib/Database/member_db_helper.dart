@@ -30,10 +30,16 @@ class MemberDBHelper{
     return db.insert(memberTableName, memberModel.toMap());
   }
 
-       static Future<MemberModel> getValidMemberInfo(String memberEmail) async {
+  static Future<MemberModel> getValidMemberInfo(String memberEmail) async {
     final db = await open();
     final List<Map<String, dynamic>> mapList = await db.query(memberTableName,where: "$memberTableMemberEmail = ?", whereArgs: [memberEmail]);
     return mapList.isNotEmpty ? MemberModel.fromMap(mapList.first): MemberModel(memberImage: "", memberName: "", memberEmail: "", memberPhone: "", memberAddress: "", memberDept: "");
+  }
+
+  static Future<List<MemberModel>> getAllMembers() async {
+    final db = await open();
+    final List<Map<String, dynamic>> mapList = await db.query(memberTableName, orderBy: memberTableMemberName);
+    return List.generate(mapList.length, (index) => MemberModel.fromMap(mapList[index]));
   }
 
 

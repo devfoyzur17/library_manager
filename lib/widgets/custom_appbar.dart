@@ -1,15 +1,18 @@
-import 'package:flutter/material.dart'; 
-
- CustomAppbar(String title,  ) {
+import 'package:flutter/material.dart';
+import 'package:library_manager/pages/today_return_books.dart'; 
+ CustomAppbar(String title, dynamic context ) {
     return AppBar(
      // centerTitle: true,
      
         title: Text(title.toString()),
 
         actions: [
-          if(title=="Library Managment")
-       IconButton(onPressed: (){}, icon: Icon(Icons.search)),
-          IconButton(onPressed: (){}, icon: Icon(Icons.notifications)),
+          if(title=="Library Management")
+       IconButton(onPressed: (){}, icon: const Icon(Icons.search)),
+        if(title !="Today Return Books")
+          IconButton(onPressed: (){
+            Navigator.pushNamed(context, TodayReturnBooks.routeName);
+          }, icon:const Icon(Icons.notifications)),
         ],
         
  

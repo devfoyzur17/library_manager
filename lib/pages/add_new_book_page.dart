@@ -42,15 +42,15 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
 
     'CSE',
     'EEE',
-    'MECHANICAL',
+    'CIVIL',
     'TEXTILE',
+    'MECHANICAL',
     'STORY',
     'HISTORY',
     'POEM',
     'ISLAMIC',
     'MOTIVATIONAL',
     'HORROR',
-    
     'OTHERS',
   ];
 
@@ -58,7 +58,7 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppbar("Add New Book"),
+        appBar: CustomAppbar("Add New Book", context),
         body: Form(
           key: formKey,
           child: ListView(

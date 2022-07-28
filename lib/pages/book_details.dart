@@ -30,7 +30,7 @@ class _BookDetailsState extends State<BookDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppbar("Book Details"),
+      appBar: CustomAppbar("Book Details", context),
       body: ListView(
         children: [
           SizedBox(

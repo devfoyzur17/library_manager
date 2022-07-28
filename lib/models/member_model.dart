@@ -18,7 +18,7 @@ class MemberModel {
 
   MemberModel(
       {this.id,
-      required this.memberImage,
+      required  this.memberImage,
       required this.memberName,
       required this.memberEmail,
       required this.memberPhone,

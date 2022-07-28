@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:library_manager/pages/add_member.dart';
 import 'package:library_manager/pages/add_new_book_page.dart';
 import 'package:library_manager/pages/add_reader.dart';
-import 'package:library_manager/pages/all_books_category.dart';
 import 'package:library_manager/pages/book_details.dart';
 import 'package:library_manager/pages/check_valid_member_page.dart';
 import 'package:library_manager/pages/dashbord_page.dart';
@@ -14,6 +13,7 @@ import 'package:library_manager/pages/launcher_page.dart';
 import 'package:library_manager/pages/reader_page.dart';
 import 'package:library_manager/pages/sign_up_page.dart';
 import 'package:library_manager/pages/splash_screen.dart';
+import 'package:library_manager/pages/today_return_books.dart';
 import 'package:library_manager/pages/view_all_books.dart';
 import 'package:library_manager/providers/library_provider.dart';
 import 'package:library_manager/widgets/bottom_nav_bar.dart';
@@ -53,12 +53,12 @@ class MyApp extends StatelessWidget {
         DashbordPage.routeName : (context) => const DashbordPage(),
         AddNewBookPage.routeName : (context) => const AddNewBookPage(),
         LibraryMembers.routeName : (context) => const LibraryMembers(),
-        AllBookCategoryPage.routeName : (context) => const AllBookCategoryPage(),
         ViewAllBooks.routeName : (context) => const ViewAllBooks(),
         BookDetails.routeName : (context) => const BookDetails(),
         AddMember.routeName : (context) => const AddMember(),
         CheckValidMemberPage.routeName :(context) => const CheckValidMemberPage(),
         AddReaderPage.routeName :(context) => const AddReaderPage(),
+        TodayReturnBooks.routeName :(context) => const TodayReturnBooks(),
 
         
         

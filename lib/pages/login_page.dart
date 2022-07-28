@@ -105,9 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                       if (value == null || value.isEmpty) {
                         return 'This field must not be empty';
                       }
-                      if (value.length > 20) {
-                        return 'name must be in 20 character';
-                      } else {
+                       else {
                         return null;
                       }
                     },

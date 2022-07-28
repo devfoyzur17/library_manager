@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:library_manager/auth_pref.dart';
-import 'package:library_manager/pages/login_page.dart';
-import 'package:library_manager/pages/home_page.dart';
+import 'package:library_manager/pages/login_page.dart'; 
 import 'package:library_manager/widgets/bottom_nav_bar.dart'; 
 
 class Launcher_page extends StatefulWidget {

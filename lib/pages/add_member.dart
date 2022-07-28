@@ -41,17 +41,19 @@ class _AddMemberState extends State<AddMember> {
 
     'CSE',
     'EEE',
+    "CIVIL",
     'MECHANICAL',
     'TEXTILE',
     "No department choicen"
     
   ];
+  String _errorMessage = "";
 
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppbar("Add New Member"),
+        appBar: CustomAppbar("Add New Member",context),
         body: Form(
           key: formKey,
           child: ListView(
@@ -148,7 +150,7 @@ class _AddMemberState extends State<AddMember> {
                       contentPadding: EdgeInsets.only(left: 10),
                       focusColor: Colors.white,
                       prefixIcon: Icon(
-                        Icons.menu_book,
+                        Icons.account_circle,
                       ),
                       hintText: "Enter the member name",
                       hintStyle: TextStyle(
@@ -179,7 +181,7 @@ class _AddMemberState extends State<AddMember> {
                       contentPadding: EdgeInsets.only(left: 10),
                       focusColor: Colors.white,
                       prefixIcon: Icon(
-                        Icons.account_circle,
+                        Icons.email_outlined,
                       ),
                       hintText: "Enter the member email",
                       hintStyle: TextStyle(
@@ -210,7 +212,7 @@ class _AddMemberState extends State<AddMember> {
                       contentPadding: EdgeInsets.only(left: 10),
                       focusColor: Colors.white,
                       prefixIcon: Icon(
-                        Icons.compress_outlined,
+                        Icons.phone
                       ),
                       hintText: "Enter the phone numbers",
                       hintStyle: TextStyle(
@@ -241,7 +243,7 @@ class _AddMemberState extends State<AddMember> {
                       contentPadding: EdgeInsets.only(left: 10),
                       focusColor: Colors.white,
                       prefixIcon: Icon(
-                        Icons.my_library_books_outlined,
+                        Icons.location_on,
                       ),
                       hintText: "Enter the member address",
                       hintStyle: TextStyle(
@@ -320,6 +322,9 @@ class _AddMemberState extends State<AddMember> {
                   ],
                 ),
               ),
+
+              Text(_errorMessage, textAlign: TextAlign.center,style: TextStyle(color: Colors.red),),
+
               Padding(
                 padding:
                 const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
@@ -349,7 +354,7 @@ class _AddMemberState extends State<AddMember> {
   }
   
   void _addMember() async {
-      if(formKey.currentState!.validate()){
+      if(formKey.currentState!.validate() && imagePatch != null){
 
         final memberModel = MemberModel(
            memberImage: imagePatch.toString(),
@@ -368,6 +373,11 @@ class _AddMemberState extends State<AddMember> {
 
         }
 
+      }
+      else{
+        setState(() {
+          _errorMessage = "No image choisen!!";
+        });
       }
   }
 
