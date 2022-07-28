@@ -74,14 +74,9 @@ class LibraryProvider extends ChangeNotifier {
     return false;
   }
 
-  updateBooks(int id,BookModel bookModel, int index){
+  updateBooks(int id,BookModel bookModel,){
     BookDBHelper.updateBook(id,bookModel.bookImage,bookModel.bookName, bookModel.authorName, bookModel.bookQuantity, bookModel.bookDescription, bookModel.bookCategory ).then((value) {
-      booksList[index].bookImage = bookModel.bookImage;
-      booksList[index].bookName = bookModel.bookName;
-      booksList[index].authorName = bookModel.authorName;
-      booksList[index].bookQuantity = bookModel.bookQuantity;
-      booksList[index].bookDescription = bookModel.bookDescription;
-      booksList[index].bookCategory = bookModel.bookCategory;
+     
       notifyListeners();
     });
 

@@ -32,7 +32,7 @@ class _BookDetailsState extends State<BookDetails> {
         title: Text("Book details"),
         actions: [
           IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateBookPage(book: items![0], index: items![2])));
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateBookPage(book: items![0])));
           }, icon: Icon(Icons.edit))
         ],
       ),
@@ -146,7 +146,7 @@ class _BookDetailsState extends State<BookDetails> {
                         childAspectRatio: 2 / 4,
                         crossAxisSpacing: 1,
                         mainAxisSpacing: 10),
-                    itemBuilder: (context, index) =>  BookItem(bookItem: items![1][index], bookList: items![1], index: index,)
+                    itemBuilder: (context, index) =>  BookItem(bookItem: items![1][index], bookList: items![1],  )
                     
                 
                     ),

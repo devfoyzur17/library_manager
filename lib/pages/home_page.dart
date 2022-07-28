@@ -91,7 +91,7 @@ class _HomePageState extends State<HomePage> {
                             itemBuilder: (context, index) => BookItem(
                                   bookItem: provider.booksList[index],
                                   bookList: provider.booksList,
-                                  index : index,
+                                  
                                 )),
                       ),
                     ],
