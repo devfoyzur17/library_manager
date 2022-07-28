@@ -9,7 +9,8 @@ import '../models/book_model.dart';
 class BookItem extends StatelessWidget {
   final BookModel bookItem;
   final List<BookModel> bookList;
-  const BookItem({Key? key, required this.bookItem, required this.bookList}) : super(key: key);
+  final int index;
+  const BookItem({Key? key, required this.bookItem, required this.bookList, required this.index}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class BookItem extends StatelessWidget {
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, BookDetails.routeName, arguments: [bookItem, bookList]);
+                  Navigator.pushNamed(context, BookDetails.routeName, arguments: [bookItem, bookList,index]);
                  },
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),

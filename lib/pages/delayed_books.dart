@@ -43,6 +43,11 @@ class _DelayedBooksPageState extends State<DelayedBooksPage> {
               ),
               title: Text(provider.delayedReaderList[index].readerName, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),),
               subtitle: Text(provider.delayedReaderList[index].readerBookName, style: TextStyle(fontSize: 16),),
+           trailing: Column(children: [
+                      Text("Return Date:", style: TextStyle(color: Colors.purple),),
+                      Text(provider.delayedReaderList[index].returnDate)
+
+                    ],),
             ),
           );
         }),

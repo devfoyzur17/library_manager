@@ -62,6 +62,7 @@ class _ReaderPageState extends State<ReaderPage> {
                                   : Colors.white,
                           width: 1)),
                   child: ListTile(
+                  //  contentPadding: EdgeInsets.all(0),
                     leading: Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: ClipRRect(
@@ -82,6 +83,11 @@ class _ReaderPageState extends State<ReaderPage> {
                       provider.readerList[index].readerBookName,
                       style: TextStyle(fontSize: 16),
                     ),
+                    trailing: Column(children: [
+                      Text("Return Date:", style: TextStyle(color: Colors.purple),),
+                      Text(reader.returnDate)
+
+                    ],),
                   ),
                 ),
               );

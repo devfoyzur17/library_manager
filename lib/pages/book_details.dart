@@ -1,12 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:library_manager/models/book_model.dart';
-import 'package:library_manager/widgets/book_item.dart';
-import 'package:library_manager/widgets/custom_appbar.dart';
+import 'dart:io'; 
+import 'package:flutter/material.dart'; 
+import 'package:library_manager/pages/update_books.dart';
+import 'package:library_manager/widgets/book_item.dart'; 
 
 class BookDetails extends StatefulWidget {
   static const routeName = "book-details";
@@ -29,10 +26,19 @@ class _BookDetailsState extends State<BookDetails> {
 
   @override
   Widget build(BuildContext context) {
+  
     return Scaffold(
-      appBar: CustomAppbar("Book Details", context),
+      appBar: AppBar(
+        title: Text("Book details"),
+        actions: [
+          IconButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=>UpdateBookPage(book: items![0], index: items![2])));
+          }, icon: Icon(Icons.edit))
+        ],
+      ),
       body: ListView(
         children: [
+         
           SizedBox(
             height: 15,
           ),
@@ -46,7 +52,7 @@ class _BookDetailsState extends State<BookDetails> {
                 wordSpacing: 1),
           ),
           SizedBox(
-            height: 10,
+            height: 6,
           ),
           Text(
             items![0].authorName,
@@ -55,7 +61,7 @@ class _BookDetailsState extends State<BookDetails> {
                 fontWeight: FontWeight.w500, fontSize: 16, color: Colors.grey),
           ),
           SizedBox(
-            height: 10,
+            height: 5,
           ),
           Text(
             "${items![0].bookCategory}",
@@ -140,7 +146,7 @@ class _BookDetailsState extends State<BookDetails> {
                         childAspectRatio: 2 / 4,
                         crossAxisSpacing: 1,
                         mainAxisSpacing: 10),
-                    itemBuilder: (context, index) =>  BookItem(bookItem: items![1][index], bookList: items![1])
+                    itemBuilder: (context, index) =>  BookItem(bookItem: items![1][index], bookList: items![1], index: index,)
                     
                 
                     ),

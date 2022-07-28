@@ -28,7 +28,7 @@ class HomeCategoryBooks extends StatelessWidget {
                             itemCount: bookList.length,
                             itemBuilder: (context, index) => BookItem(
                                   bookItem: bookList[index],
-                                  bookList: bookList,
+                                  bookList: bookList, index: index,
                                 )),
                       ),
                     ],

@@ -32,6 +32,30 @@ class BookDBHelper {
     
   }
 
+
+
+
+
+   static Future<int> updateBook(int id, String bookImage, String bookName, String authorName, int bookQuantity, String discrption, String category) async{
+    final db = await open();
+
+    return db.update(booksTableName,{booksTableBookImageColName : bookImage,booksTableBookColName : bookName, booksTableBookColAuthorName : authorName, booksTableBookQuantityColName : bookQuantity, booksTableBookDescriptionColName : discrption,booksTableBookCategoryColName : category }, where: '$booksTableColId = ?', whereArgs: [id]);
+
+  }
+
+
+
+
+
+ static Future<BookModel> getBooksById(int id) async{
+    final db = await open();
+    final mapList = await db.query(booksTableName, where: '$booksTableColId = ?', whereArgs: [id]);
+
+    return BookModel.fromMap(mapList.first);
+  }
+
+
+
   static Future<List<BookModel>> getSingleCategoryBooks(String category) async {
     final db = await open();
     final List<Map<String, dynamic>> mapList = await db.query(booksTableName,where: "$booksTableBookCategoryColName = ?", whereArgs: [category]);

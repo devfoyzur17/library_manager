@@ -39,7 +39,7 @@ class _ViewAllBooksState extends State<ViewAllBooks> {
                 childAspectRatio: 5 / 9,
                 crossAxisSpacing: 2,
                 mainAxisSpacing: 10),
-            itemBuilder: (context, index) => BookItem(bookItem:  items![0]![index],bookList:  items![0]!,)),
+            itemBuilder: (context, index) => BookItem(bookItem:  items![0]![index],bookList:  items![0]!, index: index,)),
       ),
 
     );

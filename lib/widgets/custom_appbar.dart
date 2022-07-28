@@ -9,7 +9,8 @@ import 'package:library_manager/pages/today_return_books.dart';
         actions: [
           if(title=="Library Management")
        IconButton(onPressed: (){}, icon: const Icon(Icons.search)),
-        if(title !="Today Return Books")
+     
+        if((title !="Today Return Books") )
           IconButton(onPressed: (){
             Navigator.pushNamed(context, TodayReturnBooks.routeName);
           }, icon:const Icon(Icons.notifications)),

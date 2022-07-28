@@ -10,10 +10,12 @@ import 'package:library_manager/pages/library_members.dart';
 import 'package:library_manager/pages/login_page.dart';
 import 'package:library_manager/pages/home_page.dart';
 import 'package:library_manager/pages/launcher_page.dart';
+import 'package:library_manager/pages/member_details_page.dart';
 import 'package:library_manager/pages/reader_page.dart';
 import 'package:library_manager/pages/sign_up_page.dart';
 import 'package:library_manager/pages/splash_screen.dart';
 import 'package:library_manager/pages/today_return_books.dart';
+import 'package:library_manager/pages/update_books.dart';
 import 'package:library_manager/pages/view_all_books.dart';
 import 'package:library_manager/providers/library_provider.dart';
 import 'package:library_manager/widgets/bottom_nav_bar.dart';
@@ -59,7 +61,8 @@ class MyApp extends StatelessWidget {
         CheckValidMemberPage.routeName :(context) => const CheckValidMemberPage(),
         AddReaderPage.routeName :(context) => const AddReaderPage(),
         TodayReturnBooks.routeName :(context) => const TodayReturnBooks(),
-
+        MemberDetailsPage.routeName :(context) => const MemberDetailsPage(),
+         
         
         
       },
