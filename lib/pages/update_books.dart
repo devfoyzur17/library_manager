@@ -12,8 +12,8 @@ import '../models/book_model.dart';
 class UpdateBookPage extends StatefulWidget {
    
   final BookModel book;
-  final int index;
-  const UpdateBookPage({Key? key, required this.book, required this.index}) : super(key: key);
+ 
+  const UpdateBookPage({Key? key, required this.book,}) : super(key: key);
 
   @override
   State<UpdateBookPage> createState() => _UpdateBookPageState();
@@ -59,7 +59,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
     authorNameController.text = widget.book.authorName;
     bookQuantityController.text =widget.book.bookQuantity.toString();
     discriptionController.text = widget.book.bookDescription;
-    print("Init");
+ 
     super.initState();
   }
  
@@ -68,6 +68,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
 
 
     imagePatch = widget.book.bookImage;
+    bookCategory = widget.book.bookCategory;
     super.didChangeDependencies();
   }
 
@@ -316,7 +317,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
                           underline: Text(""),
                           dropdownColor: Colors.white,
 
-                          value: widget.book.bookCategory,
+                          value:bookCategory,
 
 
                           icon: const Icon(Icons.keyboard_arrow_down),
@@ -330,8 +331,9 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
                             );
                           }).toList(),
                           onChanged: (String? newValue) {
-                            setState(() {
+                            setState(() { 
                               bookCategory = newValue!;
+                              
                             });
                           },
                         ),
@@ -346,7 +348,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
                     const EdgeInsets.symmetric(horizontal: 80, vertical: 20),
                 child: ElevatedButton(
                     onPressed: (){
-                      _saveBook(widget.index);
+                      _saveBook();
                     },
                     style: ButtonStyle(
                         shape: MaterialStateProperty.all(RoundedRectangleBorder(
@@ -373,7 +375,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
     }
   }
 
-  void _saveBook(index) async {
+  void _saveBook() async {
     if (formKey.currentState!.validate()) {
       final bookModel = BookModel(
           id: widget.book.id,
@@ -382,10 +384,10 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
           authorName: authorNameController.text,
           bookQuantity: int.parse(bookQuantityController.text),
           bookDescription: discriptionController.text,
-          bookCategory: widget.book.bookCategory);
+          bookCategory: bookCategory!);
 
       Provider.of<LibraryProvider>(context, listen: false)
-          .updateBooks(bookModel.id!, bookModel, index);
+          .updateBooks(bookModel.id!, bookModel);
 
       Navigator.pushNamed(context, HomePage.routeName);
 
