@@ -71,7 +71,7 @@ class _DashbordPageState extends State<DashbordPage> {
                                child: ListTile(
 
                                 contentPadding: EdgeInsets.all(10),
-                                title: Image.asset("assets/images/reade.png", height: 50,),
+                                title: Image.asset("assets/images/team.png", height: 50,),
 
                                 subtitle: Column(
                                   children: [
@@ -100,7 +100,7 @@ class _DashbordPageState extends State<DashbordPage> {
                                child: ListTile(
 
                                 contentPadding: EdgeInsets.all(10),
-                                title: Image.asset("assets/images/boo.png", height: 50,),
+                                title: Image.asset("assets/images/reading.png", height: 50,),
 
                                 subtitle: Column(
                                   children: [

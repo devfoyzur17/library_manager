@@ -21,11 +21,14 @@ class _BookDetailsState extends State<BookDetails> {
   @override
   void didChangeDependencies() { 
     items = ModalRoute.of(context)!.settings.arguments as List;
+    
     super.didChangeDependencies();
   } 
 
   @override
   Widget build(BuildContext context) {
+    
+    
   
     return Scaffold(
       appBar: AppBar(
@@ -134,12 +137,13 @@ class _BookDetailsState extends State<BookDetails> {
                 fontWeight: FontWeight.w400, fontSize: 18, color: Colors.grey,letterSpacing: 1, wordSpacing: 1),
           ),
  
-
+  
       Padding(
         padding: const EdgeInsets.all(20.0),
         child: GridView.builder(
                   physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true, 
+                    
                     itemCount: items![1].length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
