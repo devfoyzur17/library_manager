@@ -3,7 +3,9 @@
 import 'dart:io'; 
 import 'package:flutter/material.dart'; 
 import 'package:library_manager/pages/update_books.dart';
-import 'package:library_manager/widgets/book_item.dart'; 
+import 'package:library_manager/providers/library_provider.dart';
+import 'package:library_manager/widgets/book_item.dart';
+import 'package:provider/provider.dart'; 
 
 class BookDetails extends StatefulWidget {
   static const routeName = "book-details";
@@ -27,6 +29,8 @@ class _BookDetailsState extends State<BookDetails> {
 
   @override
   Widget build(BuildContext context) {
+    
+    Provider.of<LibraryProvider>(context, listen: false).getSameBook(items![0].bookName);
     
     
   
@@ -93,14 +97,17 @@ class _BookDetailsState extends State<BookDetails> {
           Divider(
             thickness: 1,
           ),
-          Text(
-            "Availeable Now",
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                color: Colors.purple,
-                fontWeight: FontWeight.w500,
-                letterSpacing: 1,
-                wordSpacing: 1),
+          Consumer<LibraryProvider>(
+            builder: (context, provider, _) => 
+            Text(
+              provider.sameReaderBooks.length >= items![0].bookQuantity ?"Not Availeable": "Availeable Now",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  color: Colors.purple,
+                  fontWeight: FontWeight.w500,
+                  letterSpacing: 1,
+                  wordSpacing: 1),
+            ),
           ),
           Divider(
             thickness: 1,
