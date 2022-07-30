@@ -25,7 +25,7 @@ class _ReaderPageState extends State<ReaderPage> {
 
     return Scaffold(
       appBar: CustomAppbar("Reader List", context),
-      drawer: const AppDrawer(),
+      drawer:  AppDrawer(),
       body: Consumer<LibraryProvider>(
         builder: (context, provider, _) => ListView.builder(
             itemCount: provider.readerList.length,

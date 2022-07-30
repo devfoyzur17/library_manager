@@ -1,11 +1,12 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unused_local_variable, sort_child_properties_last
 
 import 'package:flutter/material.dart';
+import 'package:library_manager/pages/view_all_books.dart';
+import 'package:library_manager/pages/view_all_category.dart';
 import 'package:library_manager/providers/library_provider.dart';
 import 'package:library_manager/widgets/app_drawer.dart';
 import 'package:library_manager/widgets/book_item.dart';
-import 'package:library_manager/widgets/category_header.dart';
-import 'package:library_manager/widgets/custom_appbar.dart';
+import 'package:library_manager/widgets/category_header.dart'; 
 import 'package:library_manager/widgets/home_category_books.dart';
 import 'package:library_manager/widgets/slider.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,21 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
   }
+    var category_items = [
+
+    'CSE',
+    'EEE',
+    'CIVIL',
+    'TEXTILE',
+    'MECHANICAL',
+    'STORY',
+    'HISTORY',
+    'POEM',
+    'ISLAMIC',
+    'MOTIVATIONAL',
+    'HORROR',
+    'OTHERS',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   Navigator.pushNamed(context, TodayReturnBooks.routeName);
                 },
-                icon: const Icon(Icons.notifications)),
+                icon: ImageIcon(AssetImage('assets/images/return.png',)) ),
           ],
         ),
         drawer: AppDrawer(),
@@ -86,9 +102,65 @@ class _HomePageState extends State<HomePage> {
                     letterSpacing: 1,
                     wordSpacing: 1),
               ),
+
+              Divider(),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ 
+                    Text("Category", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,letterSpacing: 1,color: Colors.black),),
+      
+                   TextButton(onPressed: (){
+          Navigator.pushNamed(context, ViewAllCategory.routeName);
+        }, child: Text("View All>>", style: TextStyle(color: Colors.grey),))
+                ],
+              ),
+              GridView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: 8,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1 / 1,
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 10),
+                  itemBuilder: (context, index) => Container(
+      padding: EdgeInsets.all(7),
+      
+      height: 75,
+      width: 78,
+      child: Consumer<LibraryProvider>(
+        builder: (context, provider, _) => 
+          InkWell(
+          onTap: (){
+
+          Navigator.pushNamed(context, ViewAllBooks.routeName, arguments: [provider.listOfCategoryListBooks[index],category_items[index]]);
+            
+          },
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(5),
+        
+            child: FittedBox(child: Text(category_items[index],textAlign: TextAlign.center, style: TextStyle(fontSize: 12),)),
+            
+            decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(60),
+               color: Color(0xfff2f2f2)
+        
+            ),
+        
+          ),
+        ),
+      ),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.purple.withOpacity(0.5),width: 1),
+        borderRadius: BorderRadius.circular(60)
+      ),
+    )),
+    SizedBox(height: 15,),
               Divider(),
               Container(
-                height: 480,
+                height: 490,
                 child: Consumer<LibraryProvider>(
                   builder: (context, provider, _) => Column(
                     children: [
@@ -106,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
-                                    childAspectRatio: 5 / 10,
+                                    childAspectRatio: 10 / 19,
                                     crossAxisSpacing: 2,
                                     mainAxisSpacing: 10),
                             itemBuilder: (context, index) => BookItem(
@@ -121,122 +193,8 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 20,
               ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) => provider.cseBooksList.isEmpty
-                    ? Container()
-                    : SizedBox(
-                        height: 280,
-                        child: HomeCategoryBooks(
-                            title: "CSE", bookList: provider.cseBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) => provider.eeeBooksList.isEmpty
-                    ? Container()
-                    : SizedBox(
-                        height: 280,
-                        child: HomeCategoryBooks(
-                            title: "EEE", bookList: provider.eeeBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.civilBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "CIVIL",
-                                bookList: provider.civilBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.textileBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Textile",
-                                bookList: provider.textileBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.mecanicalBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Mechanical",
-                                bookList: provider.mecanicalBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.storyBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Story",
-                                bookList: provider.storyBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.historyBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "History",
-                                bookList: provider.historyBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.poemBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Poem",
-                                bookList: provider.poemBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.islamicBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Islamic",
-                                bookList: provider.islamicBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.motivationalBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Motivational",
-                                bookList: provider.motivationalBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.horrorBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Horror",
-                                bookList: provider.horrorBooksList)),
-              ),
-              Consumer<LibraryProvider>(
-                builder: (context, provider, _) =>
-                    provider.othersBooksList.isEmpty
-                        ? Container()
-                        : SizedBox(
-                            height: 280,
-                            child: HomeCategoryBooks(
-                                title: "Others",
-                                bookList: provider.othersBooksList)),
-              ),
+          
+         
             ],
           ),
         ));

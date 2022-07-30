@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:library_manager/pages/home_page.dart';
 import 'package:library_manager/providers/library_provider.dart';
+import 'package:library_manager/widgets/bottom_nav_bar.dart';
 import 'package:library_manager/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
 import '../models/book_model.dart';
@@ -38,20 +39,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
   }
 
   String? bookCategory;
-  var category_items = [
-    'CSE',
-    'EEE',
-    'CIVIL',
-    'TEXTILE',
-    'MECHANICAL',
-    'STORY',
-    'HISTORY',
-    'POEM',
-    'ISLAMIC',
-    'MOTIVATIONAL',
-    'HORROR',
-    'OTHERS',
-  ];
+  
 
   @override
   void initState() {
@@ -312,30 +300,33 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
                         decoration: BoxDecoration(
                             color: Colors.purple.withOpacity(0.1),
                             borderRadius: BorderRadius.circular(10)),
-                        child: DropdownButton(
-                          borderRadius: BorderRadius.circular(20),
-                          underline: Text(""),
-                          dropdownColor: Colors.white,
-
-                          value:bookCategory,
-
-
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          style: TextStyle(
-                              color: Colors.purple,
-                              fontWeight: FontWeight.w500),
-                          items: category_items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() { 
-                              bookCategory = newValue!;
-                              
-                            });
-                          },
+                        child: Consumer<LibraryProvider>(
+                          builder: (context, provider, _) => 
+                            DropdownButton(
+                            borderRadius: BorderRadius.circular(20),
+                            underline: Text(""),
+                            dropdownColor: Colors.white,
+                        
+                            value:bookCategory,
+                        
+                        
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            style: TextStyle(
+                                color: Colors.purple,
+                                fontWeight: FontWeight.w500),
+                            items: provider.category_items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() { 
+                                bookCategory = newValue!;
+                                
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -389,7 +380,7 @@ class _UpdateBookPageState extends State<UpdateBookPage> {
       Provider.of<LibraryProvider>(context, listen: false)
           .updateBooks(bookModel.id!, bookModel);
 
-      Navigator.pushNamed(context, HomePage.routeName);
+      Navigator.pushNamed(context, BottomNavBar.routeName);
 
       print(bookModel.toString());
     }

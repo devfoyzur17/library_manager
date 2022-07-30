@@ -56,6 +56,12 @@ class ReaderDBHelper{
     return List.generate(mapList.length, (index) => ReaderModel.fromMap(mapList[index]));
 
   }
+     static Future<List<ReaderModel>> getSameNameOfBook(String bookName) async {
+    final db = await open();
+    final List<Map<String, dynamic>> mapList = await db.query(readerTableName,where: "$readerTableReaderBookName = ?", whereArgs: [bookName]);
+    return List.generate(mapList.length, (index) => ReaderModel.fromMap(mapList[index]));
+
+  }
 
     static Future<int> deleteReader(int id) async{
     final db = await open();

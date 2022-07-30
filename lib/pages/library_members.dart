@@ -28,7 +28,7 @@ class _LibraryMembersState extends State<LibraryMembers> {
     Provider.of<LibraryProvider>(context,listen: false).getAllMembers();
     return Scaffold(
       appBar: CustomAppbar("Library Members",context),
-      drawer:const AppDrawer(),
+      drawer: AppDrawer(),
       body: 
 
   Consumer<LibraryProvider>(
@@ -44,7 +44,7 @@ class _LibraryMembersState extends State<LibraryMembers> {
                         value: member.id!,
                         headerBuilder: (context, isExpanded) => ListTile(
                           onTap: (){
-                            Navigator.pushNamed(context, MemberDetailsPage.routeName);
+                            Navigator.pushNamed(context, MemberDetailsPage.routeName, arguments: member);
                           },
                           title: Text(member.memberName),
                                   leading: Padding(

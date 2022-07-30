@@ -11,7 +11,7 @@ import '../Database/admin_db_helper.dart';
 
 class LibraryProvider extends ChangeNotifier {
   List<AdminDatabaseModel> adminList = [];
-  List<BookModel> booksList = [];
+  List<BookModel> booksList = []; 
   List<MemberModel> memberList =[];
   List<ReaderModel> readerList =[];
   List<ReaderModel> delayedReaderList =[];
@@ -28,6 +28,24 @@ class LibraryProvider extends ChangeNotifier {
   List<BookModel> motivationalBooksList = [];
   List<BookModel> horrorBooksList = [];
   List<BookModel> othersBooksList = [];
+  List<dynamic> listOfCategoryListBooks=[];
+  List<dynamic> sameReaderBooks=[];
+  var category_items = [
+
+    'CSE',
+    'EEE',
+    'CIVIL',
+    'TEXTILE',
+    'MECHANICAL',
+    'STORY',
+    'HISTORY',
+    'POEM',
+    'ISLAMIC',
+    'MOTIVATIONAL',
+    'HORROR',
+    'OTHERS',
+  ];
+
 
  
 
@@ -102,6 +120,19 @@ class LibraryProvider extends ChangeNotifier {
 
     });
   }
+
+  getAllAdmin(){
+    return AdminDBHelper.getAdmin();
+  }
+
+  getSameBook(String bookName){
+    ReaderDBHelper.getSameNameOfBook(bookName).then((value) {
+      sameReaderBooks = value;
+      notifyListeners();
+    });
+  }
+
+
 getTodayReturnBooks(){
     ReaderDBHelper.getTodayReturnBooks().then((value) {
       todayReturnBooksList = value;
@@ -144,6 +175,7 @@ getTodayReturnBooks(){
     getAllCSEBooks(){
     BookDBHelper.getSingleCategoryBooks("CSE").then((value) {
       cseBooksList = value;
+      listOfCategoryListBooks.insert(0, cseBooksList);
       notifyListeners();
 
     });
@@ -152,6 +184,8 @@ getTodayReturnBooks(){
   getAllEEEBooks(){
     BookDBHelper.getSingleCategoryBooks("EEE").then((value) {
       eeeBooksList = value;
+      
+      listOfCategoryListBooks.insert(1, eeeBooksList);
       notifyListeners();
 
     });
@@ -159,6 +193,7 @@ getTodayReturnBooks(){
   getAllCIVILBooks(){
     BookDBHelper.getSingleCategoryBooks("CIVIL").then((value) {
       civilBooksList = value;
+      listOfCategoryListBooks.insert(2, civilBooksList);
       notifyListeners();
 
     });
@@ -166,6 +201,8 @@ getTodayReturnBooks(){
    getAllTEXTILEBooks(){
     BookDBHelper.getSingleCategoryBooks("TEXTILE").then((value) {
       textileBooksList = value;
+      
+      listOfCategoryListBooks.insert(3, textileBooksList);
       notifyListeners();
 
     });
@@ -173,6 +210,8 @@ getTodayReturnBooks(){
    getAllMECHANICALBooks(){
     BookDBHelper.getSingleCategoryBooks("MECHANICAL").then((value) {
       mecanicalBooksList= value;
+      
+      listOfCategoryListBooks.insert(4, mecanicalBooksList);
       notifyListeners();
 
     });
@@ -180,6 +219,8 @@ getTodayReturnBooks(){
      getAllSTORYBooks(){
     BookDBHelper.getSingleCategoryBooks("STORY").then((value) {
       storyBooksList= value;
+      
+      listOfCategoryListBooks.insert(5, storyBooksList);
       notifyListeners();
 
     });
@@ -187,6 +228,8 @@ getTodayReturnBooks(){
      getAllHISTORYBooks(){
     BookDBHelper.getSingleCategoryBooks("HISTORY").then((value) {
       historyBooksList= value;
+      
+      listOfCategoryListBooks.insert(6, historyBooksList);
       notifyListeners();
 
     });
@@ -194,6 +237,8 @@ getTodayReturnBooks(){
    getAllPOEMBooks(){
     BookDBHelper.getSingleCategoryBooks("POEM").then((value) {
       poemBooksList= value;
+      
+      listOfCategoryListBooks.insert(7, poemBooksList);
       notifyListeners();
 
     });
@@ -201,6 +246,8 @@ getTodayReturnBooks(){
      getAllISLAMICBooks(){
     BookDBHelper.getSingleCategoryBooks("ISLAMIC").then((value) {
       islamicBooksList=value;
+      
+      listOfCategoryListBooks.insert(8, islamicBooksList);
       notifyListeners();
 
     });
@@ -208,6 +255,8 @@ getTodayReturnBooks(){
      getAllMOTIVATIONALBooks(){
     BookDBHelper.getSingleCategoryBooks("MOTIVATIONAL").then((value) {
       motivationalBooksList=value;
+      
+      listOfCategoryListBooks.insert(9, motivationalBooksList);
       notifyListeners();
 
     });
@@ -215,6 +264,8 @@ getTodayReturnBooks(){
     getAllHORRORBooks(){
     BookDBHelper.getSingleCategoryBooks("HORROR").then((value) {
       horrorBooksList=value;
+      
+      listOfCategoryListBooks.insert(10, horrorBooksList);
       notifyListeners();
 
     });
@@ -222,6 +273,8 @@ getTodayReturnBooks(){
      getAllOTHERSBooks(){
     BookDBHelper.getSingleCategoryBooks("OTHERS").then((value) {
       othersBooksList=value;
+      
+      listOfCategoryListBooks.insert(11, othersBooksList);
       notifyListeners();
 
     });

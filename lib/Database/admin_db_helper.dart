@@ -32,4 +32,15 @@ class AdminDBHelper {
     return mapList.isNotEmpty ?   AdminDatabaseModel.fromMap( mapList.first) : AdminDatabaseModel(adminName: "", adminEmail: "", adminPassword: "");
   }
 
+
+  static Future<AdminDatabaseModel> getAdmin() async {
+    final db = await open();
+    final List<Map<String, dynamic>> mapList = await db.query(adminTableName);
+    return AdminDatabaseModel.fromMap(mapList.last);
+  }
+
+
+ 
+
+
 }

@@ -38,21 +38,7 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
   }
 
   String bookCategory = 'OTHERS';
-  var category_items = [
-
-    'CSE',
-    'EEE',
-    'CIVIL',
-    'TEXTILE',
-    'MECHANICAL',
-    'STORY',
-    'HISTORY',
-    'POEM',
-    'ISLAMIC',
-    'MOTIVATIONAL',
-    'HORROR',
-    'OTHERS',
-  ];
+   
 
   final formKey = GlobalKey<FormState>();
   @override
@@ -295,29 +281,32 @@ class _AddNewBookPageState extends State<AddNewBookPage> {
                           color: Colors.purple.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(10)
                         ),
-                        child: DropdownButton(
-                          borderRadius: BorderRadius.circular(20),
-                          underline: Text(""),
-                          dropdownColor: Colors.white,
-
-
-
-                          value: bookCategory,
-
-                          icon: const Icon(Icons.keyboard_arrow_down),
-                          style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),
-                          items: category_items.map((String items) {
-                            return DropdownMenuItem(
-                              value: items,
-
-                              child: Text(items),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              bookCategory = newValue!;
-                            });
-                          },
+                        child: Consumer<LibraryProvider>(
+                          builder: (context, provider, _) => 
+                           DropdownButton(
+                            borderRadius: BorderRadius.circular(20),
+                            underline: Text(""),
+                            dropdownColor: Colors.white,
+                        
+                        
+                        
+                            value: bookCategory,
+                        
+                            icon: const Icon(Icons.keyboard_arrow_down),
+                            style: TextStyle(color: Colors.purple, fontWeight: FontWeight.w500),
+                            items: provider.category_items.map((String items) {
+                              return DropdownMenuItem(
+                                value: items,
+                        
+                                child: Text(items),
+                              );
+                            }).toList(),
+                            onChanged: (String? newValue) {
+                              setState(() {
+                                bookCategory = newValue!;
+                              });
+                            },
+                          ),
                         ),
                       ),
                     ),
